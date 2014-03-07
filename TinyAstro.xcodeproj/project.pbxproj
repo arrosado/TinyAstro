@@ -191,6 +191,7 @@
 		CA7166E418C93CF30006F949 /* Noise-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166E118C93CF30006F949 /* Noise-hd.png */; };
 		CA7166E518C93CF30006F949 /* Noise-iphone5hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166E218C93CF30006F949 /* Noise-iphone5hd.png */; };
 		CA7166E618C93CF30006F949 /* Noise.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166E318C93CF30006F949 /* Noise.png */; };
+		CA7166E918C949DD0006F949 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CA7166E818C949DD0006F949 /* Terrain.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -575,6 +576,8 @@
 		CA7166E118C93CF30006F949 /* Noise-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Noise-hd.png"; path = "Resources/Noise-hd.png"; sourceTree = "<group>"; };
 		CA7166E218C93CF30006F949 /* Noise-iphone5hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Noise-iphone5hd.png"; path = "Resources/Noise-iphone5hd.png"; sourceTree = "<group>"; };
 		CA7166E318C93CF30006F949 /* Noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Noise.png; path = Resources/Noise.png; sourceTree = "<group>"; };
+		CA7166E718C949DD0006F949 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
+		CA7166E818C949DD0006F949 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Terrain.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -646,6 +649,8 @@
 				CA71649F18C7F4E10006F949 /* Resources */,
 				CA7164B718C7F4E10006F949 /* libs */,
 				CA7166BE18C7F4E40006F949 /* Supporting Files */,
+				CA7166E718C949DD0006F949 /* Terrain.h */,
+				CA7166E818C949DD0006F949 /* Terrain.mm */,
 			);
 			path = TinyAstro;
 			sourceTree = "<group>";
@@ -1366,6 +1371,7 @@
 				CA7165A518C7F4E30006F949 /* CCGLView.m in Sources */,
 				CA7165D218C7F4E30006F949 /* CGPointExtension.m in Sources */,
 				CA7164D618C7F4E10006F949 /* CCActionPageTurn3D.m in Sources */,
+				CA7166E918C949DD0006F949 /* Terrain.mm in Sources */,
 				CA7166C718C7F4E40006F949 /* HelloWorldLayer.mm in Sources */,
 				CA71662718C7F4E30006F949 /* vec3.c in Sources */,
 				CA7165D918C7F4E30006F949 /* TGAlib.m in Sources */,

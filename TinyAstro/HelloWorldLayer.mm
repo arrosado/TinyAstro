@@ -1,7 +1,9 @@
+#import "Terrain.h"
 #import "HelloWorldLayer.h"
 
 @interface HelloWorldLayer() {
     CCSprite *_background;
+    Terrain * _terrain;
 }
 @end
 
@@ -184,32 +186,34 @@
     }
 }
 
--(void)genBackground {
+- (void)genBackground {
     
     [_background removeFromParentAndCleanup:YES];
     
     ccColor4F bgColor = [self randomBrightColor];
-    ccColor4F color2 = [self randomBrightColor];
-    
-    //_background = [self spriteWithColor:bgColor textureWidth:IS_IPHONE_5 ? 1024:512 textureHeight:512];
-    int nStripes = ((arc4random() % 4) + 1) * 2;
-    _background = [self stripedSpriteWithColor1:bgColor color2:color2
-                                   textureWidth:IS_IPHONE_5?1024:512 textureHeight:512 stripes:nStripes];
-    
-    self.scale = 0.5;
+    _background = [self spriteWithColor:bgColor textureWidth:IS_IPHONE_5 ? 1024:512 textureHeight:512];
     
     CGSize winSize = [CCDirector sharedDirector].winSize;
     _background.position = ccp(winSize.width/2, winSize.height/2);
-    
-    // Parameters to make the texture repeat over and over.
     ccTexParams tp = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
     [_background.texture setTexParameters:&tp];
     
-    [self addChild:_background z:-1];
+    [self addChild:_background];
+    
+    ccColor4F color3 = [self randomBrightColor];
+    ccColor4F color4 = [self randomBrightColor];
+    CCSprite *stripes = [self stripedSpriteWithColor1:color3 color2:color4
+                                         textureWidth:IS_IPHONE_5 ? 1024:512    textureHeight:512 stripes:4];
+    ccTexParams tp2 = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_CLAMP_TO_EDGE};
+    [stripes.texture setTexParameters:&tp2];
+    _terrain.stripes = stripes;
+    
 }
 
 -(void)onEnter {
     [super onEnter];
+    _terrain = [Terrain node];
+    [self addChild:_terrain z:1];
     [self genBackground];
     [self setTouchEnabled:YES];
     [self scheduleUpdate];
@@ -233,7 +237,8 @@
     offset += PIXELS_PER_SECOND * dt;
     
     CGSize textureSize = _background.textureRect.size;
-    [_background setTextureRect:CGRectMake(offset, 0, textureSize.width, textureSize.height)];
+    [_background setTextureRect:CGRectMake(offset * 0.7f, 0, textureSize.width, textureSize.height)];
+    [_terrain setOffsetX:offset];
     
 }
 
