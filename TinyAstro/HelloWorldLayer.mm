@@ -157,6 +157,11 @@
     
     CGSize winSize = [CCDirector sharedDirector].winSize;
     _background.position = ccp(winSize.width/2, winSize.height/2);
+    
+    // Parameters to make the texture repeat over and over.
+    ccTexParams tp = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
+    [_background.texture setTexParameters:&tp];
+    
     [self addChild:_background z:-1];
 }
 
@@ -164,6 +169,7 @@
     [super onEnter];
     [self genBackground];
     [self setTouchEnabled:YES];
+    [self scheduleUpdate];
 }
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -175,6 +181,17 @@
     {
     }
     return self;
+}
+
+- (void)update:(ccTime)dt {
+    
+    float PIXELS_PER_SECOND = 100;
+    static float offset = 0;
+    offset += PIXELS_PER_SECOND * dt;
+    
+    CGSize textureSize = _background.textureRect.size;
+    [_background setTextureRect:CGRectMake(offset, 0, textureSize.width, textureSize.height)];
+    
 }
 
 @end
