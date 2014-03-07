@@ -4,6 +4,7 @@
 @interface HelloWorldLayer() {
     CCSprite *_background;
     Terrain * _terrain;
+    b2World * _world;
 }
 @end
 
@@ -210,9 +211,35 @@
     
 }
 
+- (void)setupWorld {
+    b2Vec2 gravity = b2Vec2(0.0f, -7.0f);
+    bool doSleep = true;
+    _world = new b2World(gravity);
+    _world->SetAllowSleeping(doSleep);
+}
+
+- (void)createTestBodyAtPostition:(CGPoint)position {
+    
+    b2BodyDef testBodyDef;
+    testBodyDef.type = b2_dynamicBody;
+    testBodyDef.position.Set(position.x/PTM_RATIO, position.y/PTM_RATIO);
+    b2Body * testBody = _world->CreateBody(&testBodyDef);
+    
+    b2CircleShape testBodyShape;
+    b2FixtureDef testFixtureDef;
+    testBodyShape.m_radius = 25.0/PTM_RATIO;
+    testFixtureDef.shape = &testBodyShape;
+    testFixtureDef.density = 1.0;
+    testFixtureDef.friction = 0.2;
+    testFixtureDef.restitution = 0.5;
+    testBody->CreateFixture(&testFixtureDef);
+    
+}
+
 -(void)onEnter {
     [super onEnter];
-    _terrain = [Terrain node];
+    [self setupWorld];
+    _terrain = [[[Terrain alloc] initWithWorld:_world] autorelease];
     [self addChild:_terrain z:1];
     [self genBackground];
     [self setTouchEnabled:YES];
@@ -221,6 +248,9 @@
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self genBackground];
+    UITouch *anyTouch = [touches anyObject];
+    CGPoint touchLocation = [_terrain convertTouchToNodeSpace:anyTouch];
+    [self createTestBodyAtPostition:touchLocation];
 }
 
 -(id)init {
@@ -231,6 +261,25 @@
 }
 
 - (void)update:(ccTime)dt {
+    
+    static double UPDATE_INTERVAL = 1.0f/60.0f;
+    static double MAX_CYCLES_PER_FRAME = 5;
+    static double timeAccumulator = 0;
+    
+    timeAccumulator += dt;
+    if (timeAccumulator > (MAX_CYCLES_PER_FRAME * UPDATE_INTERVAL)) {
+        timeAccumulator = UPDATE_INTERVAL;
+    }
+    
+    int32 velocityIterations = 3;
+    int32 positionIterations = 2;
+    while (timeAccumulator >= UPDATE_INTERVAL) {
+        timeAccumulator -= UPDATE_INTERVAL;
+        _world->Step(UPDATE_INTERVAL,
+                     velocityIterations, positionIterations);
+        _world->ClearForces();
+        
+    }
     
     float PIXELS_PER_SECOND = 100;
     static float offset = 0;

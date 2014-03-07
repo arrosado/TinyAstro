@@ -1,5 +1,6 @@
 #import "HelloWorldLayer.h"
 #import "Terrain.h"
+#import "GLES-Render.h"
 
 #define kMaxHillKeyPoints 1000
 #define kHillSegmentWidth 5
@@ -17,6 +18,9 @@
     CGPoint _hillTexCoords[kMaxHillVertices];
     int _nBorderVertices;
     CGPoint _borderVertices[kMaxBorderVertices];
+    b2World * _world;
+    b2Body * _body;
+    GLESDebugDraw * _debugDraw;
 }
 @end
 
@@ -82,9 +86,32 @@
         }
         
         prevFromKeyPointI = _fromKeyPointI;
-        prevToKeyPointI = _toKeyPointI;        
+        prevToKeyPointI = _toKeyPointI;
+        [self resetBox2DBody];
     }
     
+}
+
+- (void) resetBox2DBody {
+    
+    if(_body) {
+        _world->DestroyBody(_body);
+    }
+    
+    b2BodyDef bd;
+    bd.position.Set(0, 0);
+    
+    _body = _world->CreateBody(&bd);
+    
+    b2EdgeShape shape;
+    
+    b2Vec2 p1, p2;
+    for (int i=0; i<_nBorderVertices-1; i++) {
+        p1 = b2Vec2(_borderVertices[i].x/PTM_RATIO,_borderVertices[i].y/PTM_RATIO);
+        p2 = b2Vec2(_borderVertices[i+1].x/PTM_RATIO,_borderVertices[i+1].y/PTM_RATIO);
+        shape.Set(p1, p2);
+        _body->CreateFixture(&shape, 0);
+    }
 }
 
 - (void) generateHills {
@@ -124,11 +151,20 @@
     }
 }
 
--(id)init {
+- (void)setupDebugDraw {
+    _debugDraw = new GLESDebugDraw(PTM_RATIO);
+    _world->SetDebugDraw(_debugDraw);
+    _debugDraw->SetFlags(GLESDebugDraw::e_shapeBit | GLESDebugDraw::e_jointBit);
+}
+
+- (id)initWithWorld:(b2World *)world {
     if ((self = [super init])) {
-        self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
+        _world = world;
+        [self setupDebugDraw];
         [self generateHills];
         [self resetHillVertices];
+        
+        self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
     }
     return self;
 }
@@ -173,6 +209,8 @@
         }
     }
     */
+    
+    _world->DrawDebugData();
 }
 
 - (void) setOffsetX:(float)newOffsetX {
