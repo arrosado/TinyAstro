@@ -307,6 +307,12 @@
     //offset += PIXELS_PER_SECOND * dt;
     
     [_hero update];
+    
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    float scale = (winSize.height*3/4) / _hero.position.y;
+    if (scale > 1) scale = 1;
+    _terrain.scale = scale;
+    
     float offset = _hero.position.x;
     
     CGSize textureSize = _background.textureRect.size;
