@@ -58,6 +58,73 @@
     return [CCSprite spriteWithTexture:renderTexture.sprite.texture];
 }
 
+-(CCSprite *)stripedSpriteWithColor1:(ccColor4F)c1 color2:(ccColor4F)c2 textureWidth:(float)textureWidth
+                       textureHeight:(float)textureHeight stripes:(int)nStripes {
+    
+    // 1: Create new CCRenderTexture
+    CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:textureWidth height:textureHeight];
+    
+    // 2: Call CCRenderTexture:begin
+    [rt beginWithClear:c1.r g:c1.g b:c1.b a:c1.a];
+    
+    // 3: Draw into the texture
+    
+    // Layer 1: Stripes
+    CGPoint vertices[nStripes*6];
+    ccColor4F colors[nStripes*6];
+    
+    int nVertices = 0;
+    float x1 = -textureHeight;
+    float x2;
+    float y1 = textureHeight;
+    float y2 = 0;
+    float dx = textureWidth / nStripes * 2;
+    float stripeWidth = dx/2;
+    for (int i=0; i<nStripes; i++) {
+        x2 = x1 + textureHeight;
+        
+        vertices[nVertices] = CGPointMake(x1, y1);
+        colors[nVertices++] = (ccColor4F){c2.r, c2.g, c2.b, c2.a};
+        
+        vertices[nVertices] = CGPointMake(x1+stripeWidth, y1);
+        colors[nVertices++] = (ccColor4F){c2.r, c2.g, c2.b, c2.a};
+        
+        vertices[nVertices] = CGPointMake(x2, y2);
+        colors[nVertices++] = (ccColor4F){c2.r, c2.g, c2.b, c2.a};
+        
+        vertices[nVertices] = vertices[nVertices-2];
+        colors[nVertices++] = (ccColor4F){c2.r, c2.g, c2.b, c2.a};
+        
+        vertices[nVertices] = vertices[nVertices-2];
+        colors[nVertices++] = (ccColor4F){c2.r, c2.g, c2.b, c2.a};
+        
+        vertices[nVertices] = CGPointMake(x2+stripeWidth, y2);
+        colors[nVertices++] = (ccColor4F){c2.r, c2.g, c2.b, c2.a};
+        x1 += dx;
+    }
+    
+    self.shaderProgram =
+    [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
+    
+    // Layer 2: Noise
+    CCSprite *noise = [CCSprite spriteWithFile:@"Noise.png"];
+    [noise setBlendFunc:(ccBlendFunc){GL_DST_COLOR, GL_ZERO}];
+    noise.position = ccp(textureWidth/2, textureHeight/2);
+    [noise visit];
+    
+    // Layer 3: Stripes
+    CC_NODE_DRAW_SETUP();
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_TRUE, 0, colors);
+    glDrawArrays(GL_TRIANGLES, 0, (GLsizei)nVertices);
+    
+    // 4: Call CCRenderTexture:end
+    [rt end];
+    
+    // 5: Create a new Sprite from the texture
+    return [CCSprite spriteWithTexture:rt.sprite.texture];
+}
+
 -(ccColor4F)randomBrightColor {
     while(true) {
         float requiredBrightness = 192;
@@ -76,11 +143,17 @@
 
 -(void)genBackground {
     
-    
     [_background removeFromParentAndCleanup:YES];
     
     ccColor4F bgColor = [self randomBrightColor];
-    _background = [self spriteWithColor:bgColor textureWidth:IS_IPHONE_5 ? 1024:512 textureHeight:512];
+    ccColor4F color2 = [self randomBrightColor];
+    
+    //_background = [self spriteWithColor:bgColor textureWidth:IS_IPHONE_5 ? 1024:512 textureHeight:512];
+    int nStripes = ((arc4random() % 4) + 1) * 2;
+    _background = [self stripedSpriteWithColor1:bgColor color2:color2
+                                   textureWidth:IS_IPHONE_5?1024:512 textureHeight:512 stripes:nStripes];
+    
+    self.scale = 0.5;
     
     CGSize winSize = [CCDirector sharedDirector].winSize;
     _background.position = ccp(winSize.width/2, winSize.height/2);
