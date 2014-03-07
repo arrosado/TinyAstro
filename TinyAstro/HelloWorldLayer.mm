@@ -1,6 +1,7 @@
 #import "Terrain.h"
 #import "HelloWorldLayer.h"
 #import "Hero.h"
+#import "SimpleAudioEngine.h"
 
 @interface HelloWorldLayer() {
     CCSprite *_background;
@@ -249,19 +250,23 @@
     [self scheduleUpdate];
     _hero = [[[Hero alloc] initWithWorld:_world] autorelease];
     [_terrain.batchNode addChild:_hero];
+    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"TinySeal.caf" loop:YES];
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self genBackground];
+    //[self genBackground];
+    [_hero runForceAnimation];
     _tapDown = YES;
 }
 
 -(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     _tapDown = NO;
+    [_hero runNormalAnimation];
 }
 
 - (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     _tapDown = NO;
+    [_hero runNormalAnimation];
 }
 
 -(id)init {
@@ -281,6 +286,10 @@
             [_hero dive];
         }
     }
+    else {
+        [_hero nodive];
+    }
+    
     [_hero limitVelocity];
     
     static double UPDATE_INTERVAL = 1.0f/60.0f;

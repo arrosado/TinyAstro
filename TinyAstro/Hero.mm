@@ -17,10 +17,28 @@
     BOOL _awake;
     b2Vec2 _prevVels[NUM_PREV_VELS];
     int _nextVel;
+    CCAnimation *_normalAnim;
+    CCAnimate *_normalAnimate;
 }
 @end
 
 @implementation Hero
+
+- (void)runNormalAnimation {
+    if (_normalAnimate || !_awake) return;
+    _normalAnimate = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:_normalAnim]];
+    [self runAction:_normalAnimate];
+}
+
+- (void)runForceAnimation {
+    [_normalAnimate stop];
+    _normalAnimate = nil;
+    [self setDisplayFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"seal_downhill.png"]];
+}
+
+- (void)nodive {
+    [self runNormalAnimation];
+}
 
 - (void)createBody {
     
@@ -79,6 +97,10 @@
     if ((self = [super initWithSpriteFrameName:@"seal1.png"])) {
         _world = world;
         [self createBody];
+        _normalAnim = [[CCAnimation alloc] init];
+        [_normalAnim addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"seal1.png"]];
+        [_normalAnim addSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"seal2.png"]];
+        [_normalAnim setDelayPerUnit:0.1];
     }
     return self;
     

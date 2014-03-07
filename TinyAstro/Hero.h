@@ -15,5 +15,8 @@
 - (void)limitVelocity;
 - (id)initWithWorld:(b2World *)world;
 - (void)update;
+- (void)nodive;
+- (void)runForceAnimation;
+- (void)runNormalAnimation;
 
 @end

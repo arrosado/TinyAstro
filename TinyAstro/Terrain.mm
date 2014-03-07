@@ -214,7 +214,7 @@
     }
     */
     
-    _world->DrawDebugData();
+    //_world->DrawDebugData();
 }
 
 - (void) setOffsetX:(float)newOffsetX {
