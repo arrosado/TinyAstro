@@ -9,10 +9,14 @@
 #import "Hero.h"
 #import "HelloWorldLayer.h"
 
+#define NUM_PREV_VELS   5
+
 @interface Hero() {
     b2World * _world;
     b2Body * _body;
     BOOL _awake;
+    b2Vec2 _prevVels[NUM_PREV_VELS];
+    int _nextVel;
 }
 @end
 
@@ -85,7 +89,15 @@
     self.position = ccp(_body->GetPosition().x*PTM_RATIO, _body->GetPosition().y*PTM_RATIO);
     b2Vec2 vel = _body->GetLinearVelocity();
     b2Vec2 weightedVel = vel;
-    float angle = ccpToAngle(ccp(vel.x, vel.y));
+    
+    for(int i = 0; i < NUM_PREV_VELS; ++i) {
+        weightedVel += _prevVels[i];
+    }
+    weightedVel = b2Vec2(weightedVel.x/NUM_PREV_VELS, weightedVel.y/NUM_PREV_VELS);
+    _prevVels[_nextVel++] = vel;
+    if (_nextVel >= NUM_PREV_VELS) _nextVel = 0;
+    
+    float angle = ccpToAngle(ccp(weightedVel.x, weightedVel.y));
     if (_awake) {
         self.rotation = -1 * CC_RADIANS_TO_DEGREES(angle);
     }
