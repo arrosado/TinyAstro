@@ -2,6 +2,7 @@
 #import "Terrain.h"
 
 #define kMaxHillKeyPoints 1000
+#define kHillSegmentWidth 10
 
 @interface Terrain() {
     int _offsetX;
@@ -80,6 +81,28 @@
     for(int i = MAX(_fromKeyPointI, 1); i <= _toKeyPointI; ++i) {
         ccDrawColor4F(1.0, 0, 0, 1.0);
         ccDrawLine(_hillKeyPoints[i-1], _hillKeyPoints[i]);
+        
+        ccDrawColor4F(1.0, 1.0, 1.0, 1.0);
+        
+        CGPoint p0 = _hillKeyPoints[i-1];
+        CGPoint p1 = _hillKeyPoints[i];
+        int hSegments = floorf((p1.x-p0.x)/kHillSegmentWidth);
+        float dx = (p1.x - p0.x) / hSegments;
+        float da = M_PI / hSegments;
+        float ymid = (p0.y + p1.y) / 2;
+        float ampl = (p0.y - p1.y) / 2;
+        
+        CGPoint pt0, pt1;
+        pt0 = p0;
+        for (int j = 0; j < hSegments+1; ++j) {
+            
+            pt1.x = p0.x + j*dx;
+            pt1.y = ymid + ampl * cosf(da*j);
+            
+            ccDrawLine(pt0, pt1);
+            
+            pt0 = pt1;   
+        }
     }
 }
 

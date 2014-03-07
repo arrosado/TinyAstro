@@ -217,7 +217,6 @@
     [self genBackground];
     [self setTouchEnabled:YES];
     [self scheduleUpdate];
-    self.scale = 0.25f;
 }
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
