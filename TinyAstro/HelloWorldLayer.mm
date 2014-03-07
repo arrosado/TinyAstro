@@ -1,10 +1,12 @@
 #import "Terrain.h"
 #import "HelloWorldLayer.h"
+#import "Hero.h"
 
 @interface HelloWorldLayer() {
     CCSprite *_background;
     Terrain * _terrain;
     b2World * _world;
+    Hero * _hero;
 }
 @end
 
@@ -244,6 +246,8 @@
     [self genBackground];
     [self setTouchEnabled:YES];
     [self scheduleUpdate];
+    _hero = [[[Hero alloc] initWithWorld:_world] autorelease];
+    [_terrain.batchNode addChild:_hero];
 }
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -281,9 +285,12 @@
         
     }
     
-    float PIXELS_PER_SECOND = 100;
-    static float offset = 0;
-    offset += PIXELS_PER_SECOND * dt;
+    //float PIXELS_PER_SECOND = 100;
+    //static float offset = 0;
+    //offset += PIXELS_PER_SECOND * dt;
+    
+    [_hero update];
+    float offset = _hero.position.x;
     
     CGSize textureSize = _background.textureRect.size;
     [_background setTextureRect:CGRectMake(offset * 0.7f, 0, textureSize.width, textureSize.height)];

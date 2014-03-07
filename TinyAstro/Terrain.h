@@ -15,6 +15,7 @@
 }
 
 @property (retain) CCSprite * stripes;
+@property (retain) CCSpriteBatchNode * batchNode;
 
 -(id)initWithWorld:(b2World *)world;
 -(void)setOffsetX:(float)newOffsetX;

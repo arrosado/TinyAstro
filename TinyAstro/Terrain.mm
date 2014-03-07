@@ -165,6 +165,10 @@
         [self resetHillVertices];
         
         self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
+        
+        _batchNode = [CCSpriteBatchNode batchNodeWithFile:@"TinySeal.png"];
+        [self addChild:_batchNode];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"TinySeal.plist"];
     }
     return self;
 }
@@ -214,8 +218,10 @@
 }
 
 - (void) setOffsetX:(float)newOffsetX {
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    
     _offsetX = newOffsetX;
-    self.position = CGPointMake(-_offsetX*self.scale, 0);
+    self.position = CGPointMake(winSize.width/8-_offsetX*self.scale, 0);
     [self resetHillVertices];
 }
 

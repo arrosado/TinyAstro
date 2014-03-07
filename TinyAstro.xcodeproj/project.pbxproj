@@ -192,6 +192,15 @@
 		CA7166E518C93CF30006F949 /* Noise-iphone5hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166E218C93CF30006F949 /* Noise-iphone5hd.png */; };
 		CA7166E618C93CF30006F949 /* Noise.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166E318C93CF30006F949 /* Noise.png */; };
 		CA7166E918C949DD0006F949 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CA7166E818C949DD0006F949 /* Terrain.mm */; };
+		CA7166ED18C963AB0006F949 /* Hero.mm in Sources */ = {isa = PBXBuildFile; fileRef = CA7166EC18C963AB0006F949 /* Hero.mm */; };
+		CA7166EF18C9650E0006F949 /* spaceman.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166EE18C9650E0006F949 /* spaceman.png */; };
+		CA7166FA18C965DA0006F949 /* seal1.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166F118C965DA0006F949 /* seal1.png */; };
+		CA7166FB18C965DA0006F949 /* seal2.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166F218C965DA0006F949 /* seal2.png */; };
+		CA7166FC18C965DA0006F949 /* seal_downhill.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166F318C965DA0006F949 /* seal_downhill.png */; };
+		CA7166FD18C965DA0006F949 /* TinySeal.caf in Resources */ = {isa = PBXBuildFile; fileRef = CA7166F518C965DA0006F949 /* TinySeal.caf */; };
+		CA7166FE18C965DA0006F949 /* TinySeal.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA7166F718C965DA0006F949 /* TinySeal.plist */; };
+		CA7166FF18C965DA0006F949 /* TinySeal.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166F818C965DA0006F949 /* TinySeal.png */; };
+		CA71670018C965DA0006F949 /* TinySeal.tps in Resources */ = {isa = PBXBuildFile; fileRef = CA7166F918C965DA0006F949 /* TinySeal.tps */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -578,6 +587,16 @@
 		CA7166E318C93CF30006F949 /* Noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Noise.png; path = Resources/Noise.png; sourceTree = "<group>"; };
 		CA7166E718C949DD0006F949 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
 		CA7166E818C949DD0006F949 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Terrain.mm; sourceTree = "<group>"; };
+		CA7166EB18C963AB0006F949 /* Hero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hero.h; sourceTree = "<group>"; };
+		CA7166EC18C963AB0006F949 /* Hero.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Hero.mm; sourceTree = "<group>"; };
+		CA7166EE18C9650E0006F949 /* spaceman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spaceman.png; path = Resources/spaceman.png; sourceTree = "<group>"; };
+		CA7166F118C965DA0006F949 /* seal1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seal1.png; sourceTree = "<group>"; };
+		CA7166F218C965DA0006F949 /* seal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seal2.png; sourceTree = "<group>"; };
+		CA7166F318C965DA0006F949 /* seal_downhill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seal_downhill.png; sourceTree = "<group>"; };
+		CA7166F518C965DA0006F949 /* TinySeal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TinySeal.caf; sourceTree = "<group>"; };
+		CA7166F718C965DA0006F949 /* TinySeal.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TinySeal.plist; sourceTree = "<group>"; };
+		CA7166F818C965DA0006F949 /* TinySeal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TinySeal.png; sourceTree = "<group>"; };
+		CA7166F918C965DA0006F949 /* TinySeal.tps */ = {isa = PBXFileReference; lastKnownFileType = file; path = TinySeal.tps; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -651,6 +670,8 @@
 				CA7166BE18C7F4E40006F949 /* Supporting Files */,
 				CA7166E718C949DD0006F949 /* Terrain.h */,
 				CA7166E818C949DD0006F949 /* Terrain.mm */,
+				CA7166EB18C963AB0006F949 /* Hero.h */,
+				CA7166EC18C963AB0006F949 /* Hero.mm */,
 			);
 			path = TinyAstro;
 			sourceTree = "<group>";
@@ -658,6 +679,11 @@
 		CA71649F18C7F4E10006F949 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CA7166F018C965DA0006F949 /* Raw */,
+				CA7166F418C965DA0006F949 /* Sounds */,
+				CA7166F618C965DA0006F949 /* Sprite Sheets */,
+				CA7166F918C965DA0006F949 /* TinySeal.tps */,
+				CA7166EE18C9650E0006F949 /* spaceman.png */,
 				CA7166E118C93CF30006F949 /* Noise-hd.png */,
 				CA7166E218C93CF30006F949 /* Noise-iphone5hd.png */,
 				CA7166E318C93CF30006F949 /* Noise.png */,
@@ -1198,6 +1224,33 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CA7166F018C965DA0006F949 /* Raw */ = {
+			isa = PBXGroup;
+			children = (
+				CA7166F118C965DA0006F949 /* seal1.png */,
+				CA7166F218C965DA0006F949 /* seal2.png */,
+				CA7166F318C965DA0006F949 /* seal_downhill.png */,
+			);
+			path = Raw;
+			sourceTree = "<group>";
+		};
+		CA7166F418C965DA0006F949 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				CA7166F518C965DA0006F949 /* TinySeal.caf */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		CA7166F618C965DA0006F949 /* Sprite Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				CA7166F718C965DA0006F949 /* TinySeal.plist */,
+				CA7166F818C965DA0006F949 /* TinySeal.png */,
+			);
+			path = "Sprite Sheets";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1252,14 +1305,22 @@
 				CA7164B118C7F4E10006F949 /* Icon.png in Resources */,
 				CA71660F18C7F4E30006F949 /* ChangeLog in Resources */,
 				CA7164A318C7F4E10006F949 /* Default@2x.png in Resources */,
+				CA7166FD18C965DA0006F949 /* TinySeal.caf in Resources */,
+				CA7166EF18C9650E0006F949 /* spaceman.png in Resources */,
+				CA7166FF18C965DA0006F949 /* TinySeal.png in Resources */,
 				CA7164AD18C7F4E10006F949 /* Icon-Small.png in Resources */,
+				CA7166FC18C965DA0006F949 /* seal_downhill.png in Resources */,
 				CA7164A918C7F4E10006F949 /* Icon-72.png in Resources */,
+				CA7166FB18C965DA0006F949 /* seal2.png in Resources */,
+				CA7166FE18C965DA0006F949 /* TinySeal.plist in Resources */,
 				CA7164A118C7F4E10006F949 /* Default.png in Resources */,
 				CA7166E418C93CF30006F949 /* Noise-hd.png in Resources */,
 				CA7164AB18C7F4E10006F949 /* Icon-Small-50.png in Resources */,
 				CA7164B618C7F4E10006F949 /* iTunesArtwork in Resources */,
+				CA7166FA18C965DA0006F949 /* seal1.png in Resources */,
 				CA7166CF18C7F4E40006F949 /* blocks.png in Resources */,
 				CA7166E618C93CF30006F949 /* Noise.png in Resources */,
+				CA71670018C965DA0006F949 /* TinySeal.tps in Resources */,
 				CA7166E518C93CF30006F949 /* Noise-iphone5hd.png in Resources */,
 				CA7164AF18C7F4E10006F949 /* Icon-Small@2x.png in Resources */,
 				CA7164A718C7F4E10006F949 /* Default-Landscape~ipad.png in Resources */,
@@ -1290,6 +1351,7 @@
 				CA71650A18C7F4E20006F949 /* ccGLStateCache.m in Sources */,
 				CA7165DC18C7F4E30006F949 /* TransformUtils.m in Sources */,
 				CA7166B718C7F4E40006F949 /* b2WheelJoint.cpp in Sources */,
+				CA7166ED18C963AB0006F949 /* Hero.mm in Sources */,
 				CA71652918C7F4E20006F949 /* CCNode+Debug.m in Sources */,
 				CA71650418C7F4E20006F949 /* ccFPSImages.m in Sources */,
 				CA71668018C7F4E40006F949 /* b2ChainAndPolygonContact.cpp in Sources */,
