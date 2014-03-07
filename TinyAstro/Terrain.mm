@@ -7,10 +7,29 @@
     int _offsetX;
     CGPoint _hillKeyPoints[kMaxHillKeyPoints];
     CCSprite *_stripes;
+    int _fromKeyPointI;
+    int _toKeyPointI;
 }
 @end
 
 @implementation Terrain
+
+- (void)resetHillVertices {
+    
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    
+    static int prevFromKeyPointI = -1;
+    static int prevToKeyPointI = -1;
+    
+    // key points interval for drawing
+    while (_hillKeyPoints[_fromKeyPointI+1].x < _offsetX-winSize.width/8/self.scale) {
+        _fromKeyPointI++;
+    }
+    while (_hillKeyPoints[_toKeyPointI].x < _offsetX+winSize.width*12/8/self.scale) {
+        _toKeyPointI++;
+    }
+    
+}
 
 - (void) generateHills {
     
@@ -52,12 +71,14 @@
 -(id)init {
     if ((self = [super init])) {
         [self generateHills];
+        [self resetHillVertices];
     }
     return self;
 }
 
 -(void)draw {
-    for(int i = 1; i < kMaxHillKeyPoints; ++i) {
+    for(int i = MAX(_fromKeyPointI, 1); i <= _toKeyPointI; ++i) {
+        ccDrawColor4F(1.0, 0, 0, 1.0);
         ccDrawLine(_hillKeyPoints[i-1], _hillKeyPoints[i]);
     }
 }
@@ -65,6 +86,7 @@
 - (void) setOffsetX:(float)newOffsetX {
     _offsetX = newOffsetX;
     self.position = CGPointMake(-_offsetX*self.scale, 0);
+    [self resetHillVertices];
 }
 
 - (void)dealloc {
