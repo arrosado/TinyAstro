@@ -45,6 +45,30 @@
     _body->CreateFixture(&fd);
     
 }
+- (void) wake {
+    _awake = YES;
+    _body->SetActive(true);
+    _body->ApplyLinearImpulse(b2Vec2(1,2), _body->GetPosition());
+}
+
+- (void) dive {
+    _body->ApplyForce(b2Vec2(5,-50),_body->GetPosition());
+}
+
+- (void) limitVelocity {
+    if (!_awake) return;
+    
+    const float minVelocityX = 5;
+    const float minVelocityY = -40;
+    b2Vec2 vel = _body->GetLinearVelocity();
+    if (vel.x < minVelocityX) {
+        vel.x = minVelocityX;
+    }
+    if (vel.y < minVelocityY) {
+        vel.y = minVelocityY;
+    }
+    _body->SetLinearVelocity(vel);
+}
 
 - (id)initWithWorld:(b2World *)world {
     

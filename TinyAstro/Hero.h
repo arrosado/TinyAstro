@@ -9,6 +9,10 @@
 
 @interface Hero : CCSprite
 
+@property (readonly) BOOL awake;
+- (void)wake;
+- (void)dive;
+- (void)limitVelocity;
 - (id)initWithWorld:(b2World *)world;
 - (void)update;
 

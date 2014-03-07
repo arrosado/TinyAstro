@@ -7,6 +7,7 @@
     Terrain * _terrain;
     b2World * _world;
     Hero * _hero;
+    BOOL _tapDown;
 }
 @end
 
@@ -250,11 +251,17 @@
     [_terrain.batchNode addChild:_hero];
 }
 
--(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self genBackground];
-    UITouch *anyTouch = [touches anyObject];
-    CGPoint touchLocation = [_terrain convertTouchToNodeSpace:anyTouch];
-    [self createTestBodyAtPostition:touchLocation];
+    _tapDown = YES;
+}
+
+-(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    _tapDown = NO;
+}
+
+- (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    _tapDown = NO;
 }
 
 -(id)init {
@@ -265,6 +272,16 @@
 }
 
 - (void)update:(ccTime)dt {
+    
+    if (_tapDown) {
+        if (!_hero.awake) {
+            [_hero wake];
+            _tapDown = NO;
+        } else {
+            [_hero dive];
+        }
+    }
+    [_hero limitVelocity];
     
     static double UPDATE_INTERVAL = 1.0f/60.0f;
     static double MAX_CYCLES_PER_FRAME = 5;
