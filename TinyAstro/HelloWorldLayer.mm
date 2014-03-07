@@ -118,6 +118,49 @@
     glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_TRUE, 0, colors);
     glDrawArrays(GL_TRIANGLES, 0, (GLsizei)nVertices);
     
+    float gradientAlpha = 0.7;
+    
+    nVertices = 0;
+    
+    vertices[nVertices] = CGPointMake(0, 0);
+    colors[nVertices++] = (ccColor4F){0, 0, 0, 0};
+    
+    vertices[nVertices] = CGPointMake(textureWidth, 0);
+    colors[nVertices++] = (ccColor4F){0, 0, 0, 0};
+    
+    vertices[nVertices] = CGPointMake(0, textureHeight);
+    colors[nVertices++] = (ccColor4F){0, 0, 0, gradientAlpha};
+    
+    vertices[nVertices] = CGPointMake(textureWidth, textureHeight);
+    colors[nVertices++] = (ccColor4F){0, 0, 0, gradientAlpha};
+    
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_TRUE, 0, colors);
+    glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)nVertices);
+    
+    // layer 3: top highlight
+    float borderHeight = textureHeight/16;
+    float borderAlpha = 0.3f;
+    nVertices = 0;
+    
+    vertices[nVertices] = CGPointMake(0, 0);
+    colors[nVertices++] = (ccColor4F){0.5f, 0.5f, 0.5f, borderAlpha};
+    
+    vertices[nVertices] = CGPointMake(textureWidth, 0);
+    colors[nVertices++] = (ccColor4F){0.5f, 0.5f, 0.5f, borderAlpha};
+    
+    vertices[nVertices] = CGPointMake(0, borderHeight);
+    colors[nVertices++] = (ccColor4F){0, 0, 0, 0};
+    
+    vertices[nVertices] = CGPointMake(textureWidth, borderHeight);
+    colors[nVertices++] = (ccColor4F){0, 0, 0, 0};
+    
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_TRUE, 0, colors);
+    glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)nVertices);
+    
     // 4: Call CCRenderTexture:end
     [rt end];
     
