@@ -188,6 +188,9 @@
 		CA7166CA18C7F4E40006F949 /* IntroLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CA7166C918C7F4E40006F949 /* IntroLayer.mm */; };
 		CA7166CD18C7F4E40006F949 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = CA7166CC18C7F4E40006F949 /* GLES-Render.mm */; };
 		CA7166CF18C7F4E40006F949 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166CE18C7F4E40006F949 /* blocks.png */; };
+		CA7166E418C93CF30006F949 /* Noise-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166E118C93CF30006F949 /* Noise-hd.png */; };
+		CA7166E518C93CF30006F949 /* Noise-iphone5hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166E218C93CF30006F949 /* Noise-iphone5hd.png */; };
+		CA7166E618C93CF30006F949 /* Noise.png in Resources */ = {isa = PBXBuildFile; fileRef = CA7166E318C93CF30006F949 /* Noise.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -569,6 +572,9 @@
 		CA7166CB18C7F4E40006F949 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		CA7166CC18C7F4E40006F949 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		CA7166CE18C7F4E40006F949 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
+		CA7166E118C93CF30006F949 /* Noise-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Noise-hd.png"; path = "Resources/Noise-hd.png"; sourceTree = "<group>"; };
+		CA7166E218C93CF30006F949 /* Noise-iphone5hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Noise-iphone5hd.png"; path = "Resources/Noise-iphone5hd.png"; sourceTree = "<group>"; };
+		CA7166E318C93CF30006F949 /* Noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Noise.png; path = Resources/Noise.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -647,6 +653,9 @@
 		CA71649F18C7F4E10006F949 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CA7166E118C93CF30006F949 /* Noise-hd.png */,
+				CA7166E218C93CF30006F949 /* Noise-iphone5hd.png */,
+				CA7166E318C93CF30006F949 /* Noise.png */,
 				CA7164A018C7F4E10006F949 /* Default.png */,
 				CA7164A218C7F4E10006F949 /* Default@2x.png */,
 				CA7164A418C7F4E10006F949 /* Default-568h@2x.png */,
@@ -1241,9 +1250,12 @@
 				CA7164AD18C7F4E10006F949 /* Icon-Small.png in Resources */,
 				CA7164A918C7F4E10006F949 /* Icon-72.png in Resources */,
 				CA7164A118C7F4E10006F949 /* Default.png in Resources */,
+				CA7166E418C93CF30006F949 /* Noise-hd.png in Resources */,
 				CA7164AB18C7F4E10006F949 /* Icon-Small-50.png in Resources */,
 				CA7164B618C7F4E10006F949 /* iTunesArtwork in Resources */,
 				CA7166CF18C7F4E40006F949 /* blocks.png in Resources */,
+				CA7166E618C93CF30006F949 /* Noise.png in Resources */,
+				CA7166E518C93CF30006F949 /* Noise-iphone5hd.png in Resources */,
 				CA7164AF18C7F4E10006F949 /* Icon-Small@2x.png in Resources */,
 				CA7164A718C7F4E10006F949 /* Default-Landscape~ipad.png in Resources */,
 				CA7164A518C7F4E10006F949 /* Default-568h@2x.png in Resources */,
@@ -1533,6 +1545,7 @@
 				CA7166D418C7F4E40006F949 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
